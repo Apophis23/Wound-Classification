@@ -1,0 +1,9 @@
+# Python 관련
+__pycache__/
+
+# Jupyter Notebook 관련
+*.ipynb_checkpoints
+
+# directory 관련
+datasets/
+image/
