@@ -4,6 +4,10 @@ __pycache__/
 # Jupyter Notebook 관련
 *.ipynb_checkpoints
 
+# zip 파일 관련
+*.zip
+
 # directory 관련
 datasets/
 image/
+model/
