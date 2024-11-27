@@ -11,3 +11,4 @@ __pycache__/
 datasets/
 image/
 model/
+Wound_dataset/
