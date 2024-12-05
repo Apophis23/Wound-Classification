@@ -1,5 +1,13 @@
 import os
 from PIL import Image
+from torch.utils.data import Dataset
+import pandas as pd
+from torchvision import transforms
+
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+])
 
 class CustomDataset(Dataset):
     def __init__(self, dataframe, root_dir, transform=None):
@@ -21,3 +29,21 @@ class CustomDataset(Dataset):
             image = self.transform(image)
 
         return image, label
+
+def create_dataset_dataframe(dataset_path):
+    data = {'Path': [], 'Class': []}
+
+    entries = os.listdir(dataset_path)
+
+    for entry in entries:
+        full_path = os.path.join(dataset_path, entry)
+        if os.path.isdir(full_path):
+            files = os.listdir(full_path)
+            for file in files:
+                file_path = os.path.join(entry, file)
+
+                data['Path'].append(os.path.join(entry, file))
+                data['Class'].append(entry)
+
+    df = pd.DataFrame(data)
+    return df

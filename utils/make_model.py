@@ -1,26 +1,16 @@
+from torchvision import models
 import torch.nn as nn
-from torchvision import transforms, models
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import torch.nn.init as init
-import torchvision.datasets as datasets
-import torchvision.transforms as transforms
 
 def create_resnet_model(num_classes):
-    """Creates a ResNet model."""
     model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
     model.fc = nn.Linear(model.fc.in_features, num_classes)
     return model
 
 def create_vit_model(num_classes):
-    """Creates a Vision Transformer (ViT) model."""
     model = models.vit_b_16(pretrained=True)
     model.heads.head = nn.Linear(model.heads.head.in_features, num_classes)
     return model
 
-# Custom CNN Model with additional layers
 class CustomCNN(nn.Module):
     def __init__(self, num_classes):
         super(CustomCNN, self).__init__()
